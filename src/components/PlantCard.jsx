@@ -4,6 +4,9 @@ import { useCart } from "../context/CartContext";
 const PlantCard = ({ plant }) => {
   const { addToCart } = useCart();
 
+  const usdToInr = 83;
+  const priceInInr = plant.price * usdToInr;
+
   return (
     <div className="bg-white rounded-2xl shadow-md p-4 flex flex-col hover:shadow-lg transition">
       <img
@@ -13,7 +16,8 @@ const PlantCard = ({ plant }) => {
       />
       <h2 className="text-lg font-semibold text-green-800">{plant.name}</h2>
       <p className="text-sm text-gray-600 mb-2">{plant.description}</p>
-      <p className="text-green-600 font-bold mb-4">${plant.price}</p>
+      <p className="text-green-600 font-bold mb-4">₹{priceInInr.toLocaleString("en-IN")}</p>
+      <p className="text-sm text-gray-500">~ ${plant.price.toFixed(2)}</p>
       <div className="mt-auto flex gap-2">
         <Link
           to={`/product/${plant.id}`}
